@@ -28,6 +28,8 @@ The program uses **MediaPipe**, **OpenCV**, and **PyQt6** to detect human pose l
 * 图形界面操作
 * 轻量级桌面应用
 
+![camera](./image/camera.png)![resolution](./image/resolution.png)![view](./image/view.png)
+
 ---
 
 # Requirements / 环境要求
