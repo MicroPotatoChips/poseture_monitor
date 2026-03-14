@@ -115,7 +115,9 @@ pyinstaller poseture_monitor.py ^
 --onefile ^
 --windowed ^
 --icon=icon.ico ^
---add-data "pose_landmarker_lite.task;." ^
+--add-data "pose_landmarker_lite.task;."^
+--add-data "sound.mp3;."^
+--add-data "sound_en.mp3;."^
 --collect-all numpy ^
 --collect-all mediapipe ^
 --collect-all cv2
@@ -131,6 +133,8 @@ pyinstaller poseture_monitor.py ^
 --windowed ^
 --icon=icon.ico ^
 --add-data "pose_landmarker_lite.task;." ^
+--add-data "sound.mp3;."^
+--add-data "sound_en.mp3;."^
 --collect-all numpy ^
 --collect-all mediapipe ^
 --collect-all cv2
