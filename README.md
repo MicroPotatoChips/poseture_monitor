@@ -33,7 +33,7 @@ The program uses **MediaPipe**, **OpenCV**, and **PyQt6** to detect human pose l
 Python version:
 
 ```
-Python 3.9 – 3.11
+Python 3.12
 ```
 
 Install dependencies:
