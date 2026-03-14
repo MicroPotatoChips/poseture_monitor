@@ -112,77 +112,71 @@ def get_system_camera_names():
 class PostureMonitor(QWidget):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Posture Monitor")
-        icon_path = Path(__file__).resolve().parent / "icon.ico"
-        if icon_path.exists():
-            self.setWindowIcon(QIcon(str(icon_path)))
-        self.resize(1100, 750)
-
         # 核心变量
-        self.lang = "zh"
         self.lang = "zh"
         self.i18n = {
             "zh": {
-                "window_title": "AI ??????????",
-                "title": "AI ????",
-                "subtitle": "????????",
-                "status_title": "??????",
-                "status_idle": "????...",
-                "status_running": "????...",
-                "status_stopped": "?????",
-                "angle_idle": "????: --?",
-                "angle_prefix": "????: ",
-                "settings": "???????",
-                "camera": "?????",
-                "view": "????",
-                "res_items": ["?? (640x480)", "?? (1280x720)", "?? (1920x1080)"],
-                "view_items": ["??", "??"],
-                "start": "? ????",
-                "stop": "? ????",
-                "quit": "????",
-                "tip": "?? ???? ESC ??????",
-                "front_mode": "????",
-                "good": "???? ?",
-                "bad_generic": "????",
-                "issue_hunch": "??",
-                "issue_head_forward": "???",
-                "issue_cross_leg": "???",
-                "issue_uneven_shoulder": "??",
-                "issue_tilt_head": "??",
-                "issue_lean": "??",
-                "language": "??"
+                "window_title": "AI 智能坐姿健康分析系统",
+                "title": "AI 坐姿卫士",
+                "subtitle": "守护您的脊柱健康",
+                "status_title": "实时状态",
+                "status_idle": "等待开始...",
+                "status_running": "正在检测...",
+                "status_stopped": "监控已停止",
+                "angle_idle": "前倾角度: --°",
+                "angle_prefix": "前倾角度: ",
+                "settings": "视频分辨率",
+                "camera": "摄像头设备",
+                "view": "观察视角",
+                "res_items": ["普清 (640x480)", "高清 (1280x720)", "超清 (1920x1080)"],
+                "view_items": ["侧面", "正面"],
+                "start": "▶ 开始监控",
+                "stop": "■ 停止监控",
+                "quit": "退出程序",
+                "tip": "💡 提示：按 ESC 键可快速停止",
+                "front_mode": "正面模式",
+                "good": "坐姿端正 👍",
+                "bad_generic": "检测到不良姿势",
+                "issue_hunch": "驼背",
+                "issue_head_forward": "头前倾",
+                "issue_cross_leg": "二郎腿",
+                "issue_uneven_shoulder": "高低肩",
+                "issue_tilt_head": "歪头",
+                "issue_lean": "侧倾",
+                "language": "界面语言"
             },
             "en": {
-                "window_title": "AI Posture Monitor",
+                "window_title": "AI Posture Monitor System",
                 "title": "AI Posture Guard",
                 "subtitle": "Protect your spine health",
                 "status_title": "Live Status",
                 "status_idle": "Ready to start...",
                 "status_running": "Detecting...",
                 "status_stopped": "Monitoring stopped",
-                "angle_idle": "Front tilt: --?",
+                "angle_idle": "Front tilt: --°",
                 "angle_prefix": "Front tilt: ",
-                "settings": "Video Resolution",
+                "settings": "Resolution",
                 "camera": "Camera Device",
-                "view": "View Angle",
+                "view": "View Mode",
                 "res_items": ["SD (640x480)", "HD (1280x720)", "FHD (1920x1080)"],
-                "view_items": ["Side", "Front"],
-                "start": "? Start",
-                "stop": "? Stop",
+                "view_items": ["Side View", "Front View"],
+                "start": "▶ Start",
+                "stop": "■ Stop",
                 "quit": "Quit",
-                "tip": "?? Tip: Press ESC to stop",
-                "front_mode": "Front mode",
-                "good": "Good posture ?",
-                "bad_generic": "Bad posture",
-                "issue_hunch": "Hunched back",
-                "issue_head_forward": "Head forward",
-                "issue_cross_leg": "Leg crossing",
-                "issue_uneven_shoulder": "Uneven shoulders",
-                "issue_tilt_head": "Head tilt",
-                "issue_lean": "Side lean",
+                "tip": "💡 Tip: Press ESC to stop",
+                "front_mode": "Front Mode",
+                "good": "Good Posture 👍",
+                "bad_generic": "Bad Posture",
+                "issue_hunch": "Hunched Back",
+                "issue_head_forward": "Head Forward",
+                "issue_cross_leg": "Leg Crossing",
+                "issue_uneven_shoulder": "Uneven Shoulders",
+                "issue_tilt_head": "Head Tilt",
+                "issue_lean": "Side Lean",
                 "language": "Language"
             }
         }
+
         self.cap = None
         self.landmarker = None
         self.running = False
@@ -506,9 +500,6 @@ class PostureMonitor(QWidget):
         else: self.start_monitoring()
 
     def start_monitoring(self):
-        if self.cap:
-            self.cap.release()
-            self.cap = None
         self.cap = cv2.VideoCapture(self.camera_index)
         self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, self.current_width)
         self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, self.current_height)
@@ -522,10 +513,7 @@ class PostureMonitor(QWidget):
     def stop_monitoring(self):
         self.running = False
         self.timer.stop()
-        self.landmarker = None
-        if self.cap:
-            self.cap.release()
-            self.cap = None
+        if self.cap: self.cap.release()
         self.video_label.clear()
         self.start_btn.setStyleSheet("")
         self.apply_language()
@@ -537,9 +525,7 @@ class PostureMonitor(QWidget):
 
     def change_camera(self, idx):
         self.camera_index = self.camera_combo.itemData(idx)
-        if self.running:
-            self.stop_monitoring()
-            self.start_monitoring()
+        if self.running: self.start_monitoring()
 
     def change_view_mode(self, idx):
         self.view_mode = "side" if idx == 0 else "front"
