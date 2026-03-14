@@ -6,6 +6,9 @@ A desktop application that uses computer vision to monitor body posture in real 
 
 The program uses **MediaPipe**, **OpenCV**, and **PyQt6** to detect human pose landmarks and display posture feedback.
 
+![UI](./images/UI_cn.png)
+![UI](./images/UI_en.png)
+
 ---
 
 # Features / 功能
