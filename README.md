@@ -19,6 +19,7 @@ The program uses **MediaPipe**, **OpenCV**, and **PyQt6** to detect human pose l
 * Visual feedback on posture
 * Desktop GUI interface
 * Lightweight and easy to run
+* Voice prompts for prolonged periods of poor posture(supports both Chinese and English)
 
 ### 中文
 
@@ -27,6 +28,7 @@ The program uses **MediaPipe**, **OpenCV**, and **PyQt6** to detect human pose l
 * 提供姿态反馈提示
 * 图形界面操作
 * 轻量级桌面应用
+* 长时间不端正坐姿有语音提示(支持中英双语)
 
 ![camera](./image/camera.png)![resolution](./image/resolution.png)![view](./image/view.png)
 
