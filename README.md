@@ -58,7 +58,10 @@ Pillow
 PyQt6
 pywin32; platform_system == "Windows"
 ```
-MediaPipe Tasks Official url:https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/latest/pose_landmarker_lite.task
+MediaPipe Tasks Official url:
+```txt
+https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/latest/pose_landmarker_lite.task
+```
 
 
 ---
